@@ -1,10 +1,15 @@
-import { deleteFoodProduct, getFoodProduct, postFoodProduct, updateFoodProduct } from "../controllers/product";
+import {
+  deleteFoodProduct,
+  getFoodProduct,
+  postFoodProduct,
+  updateFoodProduct,
+} from "../controllers/product";
 import { Router } from "express";
 
 const router = Router();
 
-router.post("/food/product", postFoodProduct);
-router.get("/all/products", getFoodProduct);
+router.post("/post/food/product", postFoodProduct);
+router.get("/get/all/products", getFoodProduct);
 router.put("/update/product", updateFoodProduct);
 router.delete("/delete/product/:id", deleteFoodProduct);
 

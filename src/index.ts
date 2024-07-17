@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./routes/products";
+import brandRouter from "./routes/brands";
 dotenv.config();
 
 const DBURI = process.env.MONGO_URI || "";
@@ -19,3 +20,4 @@ mongoose.connect(DBURI).then(() => {
 });
 
 app.use(productRouter);
+app.use(brandRouter);
