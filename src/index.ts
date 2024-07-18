@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./routes/products";
 import brandRouter from "./routes/brands";
+import menuCategoriesRouter from "./routes/menu";
 dotenv.config();
 
 const DBURI = process.env.MONGO_URI || "";
@@ -21,3 +22,4 @@ mongoose.connect(DBURI).then(() => {
 
 app.use(productRouter);
 app.use(brandRouter);
+app.use(menuCategoriesRouter);

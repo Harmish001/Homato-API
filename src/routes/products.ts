@@ -9,7 +9,7 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/post/food/product", postFoodProduct);
-router.get("/get/all/products", getFoodProduct);
+router.get("/get/products", getFoodProduct);
 router.put("/update/product", updateFoodProduct);
 router.delete("/delete/product/:id", deleteFoodProduct);
 

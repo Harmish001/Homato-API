@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const BrandSchema = new mongoose.Schema(
   {
@@ -8,7 +8,10 @@ const BrandSchema = new mongoose.Schema(
     brand_logo: {
       type: String,
     },
-    brand_menu: Array,
+    brand_menu: {
+      type: Schema.Types.ObjectId,
+      ref: "menu",
+    },
   },
   { timestamps: true }
 );

@@ -12,7 +12,6 @@ export const handleErrors = (err: any) => {
 export const postFoodProduct = async (req: Request, res: Response) => {
   try {
     const { product_name, product_image, new_product } = req.body;
-    console.log(req.body);
     const product = new ProductModel({
       product_name,
       product_image,
@@ -39,7 +38,7 @@ export const getFoodProduct = async (req: Request, res: Response) => {
 export const updateFoodProduct = async (req: Request, res: Response) => {
   try {
     const { product_id, product_name, product_image, new_product } = req.body;
-    const products = await ProductModel.findByIdAndUpdate(
+    const product = await ProductModel.findByIdAndUpdate(
       { _id: product_id },
       {
         $set: {
@@ -47,11 +46,13 @@ export const updateFoodProduct = async (req: Request, res: Response) => {
           product_image,
           new_product,
         },
-      }
+      },
+      { new: true }
     );
     res.send({
       success: true,
       message: "product updated successfully",
+      product,
     });
   } catch (error) {
     res.status(400).send(handleErrors(error));
