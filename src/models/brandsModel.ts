@@ -12,6 +12,16 @@ const BrandSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "menu",
     },
+    brand_details: {
+      rating: String,
+      delivery_time: String,
+      cost_per_person: Number,
+      average_cost: Number,
+    },
+    // products: {
+    //   type: [Schema.Types.ObjectId],
+    //   ref: "products",
+    // },
   },
   { timestamps: true }
 );
