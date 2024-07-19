@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { handleErrors } from "./product";
 import { BrandModel } from "../models/brandsModel";
+import { ProductModel } from "../models/productModel";
 
 const getPopularityQuery = (value: number): { [key: string]: 1 | -1 } => {
   switch (value) {
@@ -49,15 +50,27 @@ export const gerFilterdData = async (req: Request, res: Response) => {
     const { sortby, cuisin, rating, costperperson } = req.params;
     const newSortBy = parseInt(sortby);
 
-    const menus = await BrandModel.find(
-      { ...getRatingQuery(rating), ...getCostQuery(costperperson) },
-      {
-        brand_details: 1,
-        brand_name: 1,
-        brand_logo: 1,
-      }
-    ).sort(getPopularityQuery(newSortBy));
-    res.send({ menus });
+    if (cuisin && cuisin != "null") {
+      const menu = await ProductModel.findOne(
+        { $text: { $search: cuisin } },
+        { product_name: 1, product_image: 1 }
+      ).populate({
+        path: "brands",
+        select: "brand_details brand_name brand_logo",
+      });
+      return res.send({ menu });
+    } else {
+      const menu = await BrandModel.find(
+        { ...getRatingQuery(rating), ...getCostQuery(costperperson) },
+        {
+          brand_details: 1,
+          brand_name: 1,
+          brand_logo: 1,
+        }
+      ).sort(getPopularityQuery(newSortBy));
+
+      res.send({ menu });
+    }
   } catch (error) {
     res.status(400).send(handleErrors(error));
   }

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { handleErrors } from "./product";
 import { SubMenuModel } from "../models/menuModel";
 import mongoose from "mongoose";
+import { ProductModel } from "../models/productModel";
 
 export const postMenu = async (req: Request, res: Response) => {
   try {
@@ -18,6 +19,11 @@ export const postMenu = async (req: Request, res: Response) => {
       category_name,
     });
     menuCateogry.save();
+    await ProductModel.findOneAndUpdate(
+      { _id: parent_product_id },
+      { $set: { brands: [brand_id] } },
+      { upsert: true }
+    );
     res.send({ sucess: true, message: "Menu added sucessfully" });
   } catch (error) {
     res.status(400).send(handleErrors(error));
@@ -73,6 +79,7 @@ export const updateMenu = async (req: Request, res: Response) => {
       },
       { new: true }
     );
+
     res.send({ success: true, message: "Menu updated successfully", menu });
   } catch (error) {
     res.status(400).send(handleErrors(error));

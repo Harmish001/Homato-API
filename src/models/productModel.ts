@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -12,6 +12,10 @@ const ProductSchema = new mongoose.Schema(
     },
     new_product: {
       type: Boolean,
+    },
+    brands: {
+      type: [Schema.Types.ObjectId],
+      ref: "brands",
     },
   },
   { timestamps: true }

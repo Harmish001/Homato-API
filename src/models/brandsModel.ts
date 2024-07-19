@@ -18,10 +18,6 @@ const BrandSchema = new mongoose.Schema(
       cost_per_person: Number,
       average_cost: Number,
     },
-    // products: {
-    //   type: [Schema.Types.ObjectId],
-    //   ref: "products",
-    // },
   },
   { timestamps: true }
 );
