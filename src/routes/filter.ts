@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/filter/:sortby/:cuisin/:rating/:costperperson", gerFilterdData);
+router.post("/filter", gerFilterdData);
 
 export default router;

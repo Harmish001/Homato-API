@@ -17,6 +17,7 @@ const BrandSchema = new mongoose.Schema(
       delivery_time: String,
       cost_per_person: Number,
       average_cost: Number,
+      is_veg: Boolean
     },
   },
   { timestamps: true }
